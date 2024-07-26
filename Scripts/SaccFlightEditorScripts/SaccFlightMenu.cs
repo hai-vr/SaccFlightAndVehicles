@@ -1,14 +1,17 @@
 ﻿#if UNITY_EDITOR
-#if !NOCHAT_ACTIVE
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor;
+#if !NOCHAT_ACTIVE
 using UdonSharpEditor;
+#endif
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+#if !NOCHAT_ACTIVE
 using VRC.SDKBase.Editor.BuildPipeline;
+#endif
 
 #if NOCHAT_ACTIVE
 using Input = NochatScript.Core.NochatInput;
@@ -40,6 +43,7 @@ namespace SaccFlightAndVehicles
 
             tagManager.ApplyModifiedProperties();
         }
+#if !NOCHAT_ACTIVE
         [MenuItem("SaccFlight/SetUpReferenceCameraForFlight", false, 1)]
         public static void SetUpReferenceCameraForFlight()
         {
@@ -71,6 +75,7 @@ namespace SaccFlightAndVehicles
             }
             return ls;
         }
+#endif
     }
 
     [InitializeOnLoadAttribute]
@@ -90,14 +95,19 @@ namespace SaccFlightAndVehicles
             }
         }
     }
-    public class SetObjectReferences : Editor, IVRCSDKBuildRequestedCallback
+    public class SetObjectReferences : Editor
+#if !NOCHAT_ACTIVE
+        , IVRCSDKBuildRequestedCallback
+#endif
     {
         public int callbackOrder => 10;
+#if !NOCHAT_ACTIVE
         public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
         {
             SaccFlightSetup();
             return true;
         }
+#endif
         [MenuItem("SaccFlight/Debug_OnBuild_SetReferences", false, 1000)]
         public static void SaccFlightSetup()
         {
@@ -110,7 +120,9 @@ namespace SaccFlightAndVehicles
             SetEntityTargets();//sets list of targets in each vehicle's saccentity
             SetPlaneList_SaccVehicleEnterer();//^ for SaccVehicleEnterer
             SetPlaneList_RadioBase();
+#if !NOCHAT_ACTIVE
             SaccFlightMenu.SetUpReferenceCameraForFlight();
+#endif
         }
         public static void SetPlaneList_RadioBase()
         {
@@ -532,7 +544,9 @@ namespace SaccFlightAndVehicles
         public override void OnInspectorGUI()
         {
             SaccViewScreenController _target = target as SaccViewScreenController;
+#if !NOCHAT_ACTIVE       
             if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(target)) return;
+#endif
             DrawDefaultInspector();
             if (GUILayout.Button("Find Campositions In Scene") && _target.CamPosAutoFill)
             {
@@ -563,5 +577,4 @@ namespace SaccFlightAndVehicles
         }
     }
 }
-#endif
 #endif
