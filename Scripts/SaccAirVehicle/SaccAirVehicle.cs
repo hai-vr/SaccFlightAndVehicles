@@ -4,6 +4,10 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 //
+#if NOCHAT_ACTIVE
+using Input = NochatScript.Core.NochatInput;
+#endif
+
 namespace SaccFlightAndVehicles
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
@@ -1063,6 +1067,7 @@ namespace SaccFlightAndVehicles
                             }
                             ThrottleGripLastFrame = false;
                         }
+                        Debug.Log($"Throttle is {PlayerThrottle}");
 
                         if (!_DisableTaxiRotation && Taxiing && _EngineOn)
                         {

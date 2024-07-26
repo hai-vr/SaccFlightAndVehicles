@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
+#if NOCHAT_ACTIVE
+using Input = NochatScript.Core.NochatInput;
+#endif
 
 namespace SaccFlightAndVehicles
 {

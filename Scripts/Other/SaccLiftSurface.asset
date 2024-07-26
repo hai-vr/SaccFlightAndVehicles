@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SaccLiftSurface
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 15f1671689559df449f00f6067cd16d7,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 5258035de77902b4a87222022a489f6a,
     type: 2}
   udonAssembly: 
   assemblyError: 

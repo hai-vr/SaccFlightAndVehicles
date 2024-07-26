@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using VRC.SDKBase.Editor.BuildPipeline;
 
+#if NOCHAT_ACTIVE
+using Input = NochatScript.Core.NochatInput;
+#endif
+
 namespace SaccFlightAndVehicles
 {
     public class SaccFlightMenu : MonoBehaviour

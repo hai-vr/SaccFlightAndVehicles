@@ -8,6 +8,10 @@ using UnityEngine.UIElements.Experimental;
 using VRC.SDKBase;
 using VRC.Udon;
 
+#if NOCHAT_ACTIVE
+using Input = NochatScript.Core.NochatInput;
+#endif
+
 namespace SaccFlightAndVehicles
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
@@ -191,9 +195,13 @@ namespace SaccFlightAndVehicles
         [System.NonSerializedAttribute] public float PilotExitTime;
         [System.NonSerializedAttribute] public float PilotEnterTime;
         [System.NonSerializedAttribute] public bool Holding;
+        
         public void Init() { Start(); }
         private void Start()
         {
+#if NOCHAT_ACTIVE
+            Debug.Log("SaccEntity is starting");
+#endif
             if (Initialized) { return; }
             Initialized = true;
             localPlayer = Networking.LocalPlayer;
@@ -537,6 +545,14 @@ namespace SaccFlightAndVehicles
         }
         private void OnEnable()
         {
+#if NOCHAT_ACTIVE
+            Debug.Log("SaccEntity is enabling");
+            if (!Initialized)
+            {
+                Debug.Log("We will call Start() on our own");
+                Start();
+            }
+#endif
             SendEventToExtensions("SFEXT_L_OnEnable");
             ConstantForce cf = GetComponent<ConstantForce>();
             if (cf)

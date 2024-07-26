@@ -6,6 +6,10 @@ using VRC.SDKBase;
 using VRC.Udon;
 using TMPro;
 
+#if NOCHAT_ACTIVE
+using Input = NochatScript.Core.NochatInput;
+#endif
+
 namespace SaccFlightAndVehicles
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
