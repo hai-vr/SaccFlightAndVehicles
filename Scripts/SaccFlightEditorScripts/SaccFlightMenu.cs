@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+#if !NOCHAT_ACTIVE
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -558,4 +559,5 @@ namespace SaccFlightAndVehicles
         }
     }
 }
+#endif
 #endif
